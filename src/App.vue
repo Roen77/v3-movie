@@ -1,28 +1,24 @@
 <template>
+  <Header />
   <!-- Remove & use example component! -->
-  <HelloWorld 
-    :msg="message" 
-    @click="handler" />
-  <HelloWorld msg="Good" />
+  <RouterView />
+  <Footer />
 </template>
 
 <script>
-import HelloWorld from '~/components/HelloWorld'
+import Header from '~/components/Header'
+import Footer from './components/Footer.vue'
 
 export default {
-  components: {
-    HelloWorld
-  },
-  data() {
-    return {
-      message: 'Hello Vue!'
-    }
-  },
-  methods: {
-    handler() {
-      console.log(this.message)
-      this.message += '!'
-    }
+  components:{
+    Header,
+    Footer
   }
+
 }
 </script>
+
+<style lang="scss">
+
+
+</style>
