@@ -71,10 +71,10 @@ export default {
                 }
             }
             // 추가요청
-            } catch (message) {
+            } catch (error) {
                 commit('updateState',{
                     movies:[],
-                    message
+                    message:error.message
                 })
             }
             finally{
@@ -110,22 +110,6 @@ export default {
 
 }
 
-function _fetchMovie(payload){
-    const {title,type,year,page,id}=payload
-    const OMDP_API_KEY = 'f7416374';
-    const url=id?
-    `https://www.omdbapi.com/?apikey=${OMDP_API_KEY}&i=${id}`
-     :`https://www.omdbapi.com/?apikey=${OMDP_API_KEY}&s=${title}&type=${type}&y=${year}&page=${page}`
-    // const url=`https://www.omdbapi.com/?apikey=${OMDP_API_KEY}`
-
-    return new Promise((resolve,reject)=>{
-        axios.get(url)
-        .then(res=>{
-            if(res.data.Error){
-               return reject(res.data.Error)
-            }
-            resolve(res)
-        })
-        .catch(err=>reject(err.message))
-    })
+async function _fetchMovie(payload){
+ return await axios.post('/.netlify/functions/movie',payload)
 }
